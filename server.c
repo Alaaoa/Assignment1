@@ -60,8 +60,9 @@ int main(int argc, char const *argv[])
     }
     pid = fork();
     if (pid == 0) {
+    /*child process */
         if ((pwd = getpwnam(user)) == NULL) {
-            perror("Cannot find UID for nobody");
+            perror("No  UID for nobody");
         }
         setuid(pwd->pw_uid);
         valread = read(new_socket , buffer, 1024);
@@ -73,25 +74,17 @@ int main(int argc, char const *argv[])
     else if (pid > 0)
     {
 
-
-        printf(" Inside Parent ");
         int child;
-       // waitpid ( pid, & child ,0 );
-       wait();
+        wait();
         if (child > 0 )
-
             exit(EXIT_FAILURE);
 
         else
-            printf("child processed connection from client\n");
+            printf("child  connection from client\n");
     }
 
 
 
-// valread = read( new_socket , buffer, 9);
-//    printf("%s\n",buffer );
-//    send(new_socket , hello , strlen(hello) , 0 );
-//    printf("Hello message sent\n");
 
     return 0;
 }
